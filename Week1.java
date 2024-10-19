@@ -126,3 +126,75 @@ class Solution {
 
 // 3Sum
 
+// 3Sum Closest
+
+// Longest Mountain in Array
+
+// Maximum Erasure Value
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+        int ans=0;
+        int left=0;
+        int right=0;
+        HashSet<Integer> set=new HashSet<>();
+        int currentSum=0;
+        while(left<nums.length && right<nums.length && left<=right){
+            if(!set.contains(nums[right])){
+                currentSum+=nums[right];
+                set.add(nums[right]);
+                right++;
+            } else{
+                ans=Math.max(ans,currentSum);
+                currentSum-=nums[left];
+                set.remove(nums[left]);
+                left++;
+            }
+        }
+        ans=Math.max(ans,currentSum);
+        return ans;
+    }
+}
+
+// Maximum Consecutive Ones II
+
+// Contiguous Array 
+
+// Continuous Subarray Sum
+
+// Count Number of Nice Subarrays
+
+// Find Pivot Index
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int[] prefix=new int[nums.length];
+        prefix[0]=nums[0];
+        for(int i=1;i<nums.length;i++){
+            prefix[i]=prefix[i-1]+nums[i];
+        }
+        for(int i=0;i<nums.length;i++){
+            if((i==0 && 0==prefix[nums.length-1]-prefix[i])||(i==nums.length-1 && prefix[i-1]==0) || (i!=0 && prefix[i-1]==prefix[nums.length-1]-prefix[i])) return i;
+        }
+        return -1;
+    }
+}
+// K-radius Subarray Averages
+
+// Container with most water
+class Solution {
+    public int maxArea(int[] height) {
+        int i=0;
+        int j=height.length-1;
+        int ans=0;
+        while(i<j){
+            if((j-i)*Math.min(height[i],height[j])>ans) ans=(j-i)*Math.min(height[i],height[j]);
+            if(height[i]<height[j]) i++;
+            else j--;
+        }
+        return ans;
+    }
+}
+// Maximum Product Subarray
+
+// Subarray Sum Equals K
+
+
