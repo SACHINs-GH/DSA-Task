@@ -39,6 +39,7 @@ class Solution {
        return c;
     }
 }
+
 // Divide Array into Arrays with Max Difference
 class Solution {
     public int[][] divideArray(int[] nums, int k) {
@@ -51,3 +52,77 @@ class Solution {
         return ans;
     }
 }
+
+// Find Common Characters
+class Solution {
+    public List<String> commonChars(String[] words) {
+        List<String> l=new ArrayList<>();
+        Arrays.sort(words,(a,b)->a.length()-b.length());
+        int[] a=new int[26];
+        for(int i=0;i<words[0].length();i++){
+            a[words[0].charAt(i)-'a']++;
+        }
+        for(int i=1;i<words.length;i++){
+            String s=words[i];
+            int[] b=new int[26];
+            for(int j=0;j<s.length();j++){
+               b[s.charAt(j)-'a']++;
+            }
+            for(int j=0;j<26;j++){
+                a[j]=Math.min(a[j],b[j]);
+            }
+        }
+        for(int i=0;i<26;i++){
+            while(a[i]>0){
+                l.add(((char)(i+'a'))+"");
+                a[i]--;
+            }
+        }
+        return l;
+    }
+}
+
+// Lemonade Change
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int[] a=new int[3];
+        for(int i=0;i<bills.length;i++){
+            if(bills[i]==5) a[0]++;
+            else if(bills[i]==10){
+                a[1]++;
+                if(a[0] > 0) a[0]--;
+                else return false;
+            }
+            else if(bills[i]==20) {
+                a[2]++;
+                if(a[0] > 0 && a[1] > 0){
+                    a[0]--;
+                    a[1]--;
+                }
+                else if(a[0] >= 3){
+                    a[0]-=3;
+                }
+                else return false;
+            }
+        }
+        return true;
+    }
+}
+
+// Minimum Common Value
+class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+        int ans=-1;
+        int i=0;
+        int j=0;
+        while(i<nums1.length && j<nums2.length){
+            if(nums1[i]==nums2[j]) {ans=nums1[i];break;}
+            if(nums1[i]<nums2[j]) i++;
+            else j++;
+        }
+        return ans;
+    }
+}
+
+// 3Sum
+
